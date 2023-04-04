@@ -1,17 +1,29 @@
+# usage: 'python3 main.py pathToAudioFile.mp3'
+
 import whisper
 import os
 import numpy as np
 import torch
+import sys
 
-torch.cuda.is_available()
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
-print(DEVICE)
-
 model = whisper.load_model("tiny.en", device=DEVICE)
-# print(
-#     f"Model is {'multilingual' if model.is_multilingual else 'English-only'} "
-#     f"and has {sum(np.prod(p.shape) for p in model.parameters()):,} parameters."
-# )
 
-result = model.transcribe("audio.mp3")
-print(result["text"])
+def checks():
+    print(DEVICE)
+    print(
+        f"Model is {'multilingual' if model.is_multilingual else 'English-only'} "
+        f"and has {sum(np.prod(p.shape) for p in model.parameters()):,} parameters."
+    )
+
+def getData(audioFilePath):
+    recognizedObject = model.transcribe(audioFilePath)
+    return recognizedObject
+
+def getArgument(defaultValue = 'audio.mp3'):
+    if len(sys.argv) > 1:
+        return ' '.join(sys.argv[1:])
+    else:
+        return defaultValue
+
+print(getData(getArgument()))
