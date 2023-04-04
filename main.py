@@ -1,4 +1,5 @@
-# usage: 'python3 main.py pathToAudioFile.mp3'
+# Pre-reqs: 'pip install -U openai-whisper'. Note: this downloads at least 2 GB
+# Usage: python3 main.py pathToAudioFile.mp3'
 
 import whisper
 import os
@@ -8,7 +9,7 @@ import sys
 import json
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
-model = whisper.load_model("tiny.en", device=DEVICE)
+model = whisper.load_model("tiny", device=DEVICE)
 
 def checks():
     print(DEVICE)

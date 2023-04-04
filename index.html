@@ -52,14 +52,21 @@
       }
       function saveRecording(blob) {
         stopRecording();
-        recorder.stop();
+        // recorder.stop();
       }
       function saveAsFile(blob) {
+        fetch("http://localhost:3000/audio", {
+          method: "POST",
+          body: blob,
+          headers: {
+            "Content-Type": "audio/ogg",
+          },
+        });
+        return;
         // const blob = new Blob(chunks, { type: "audio/wav" });
         const url = URL.createObjectURL(blob);
 
         addEntry(url);
-        return;
         const a = document.createElement("a");
         document.body.appendChild(a);
         a.style = "display: none";

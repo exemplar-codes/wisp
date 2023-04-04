@@ -5,7 +5,7 @@ const app = express();
 
 // request body parser
 app.use(express.json());
-app.use(express.raw({ type: "mp3", limit: 1e9 }));
+app.use(express.raw({ type: ["mp3", "ogg"], limit: 1e9 }));
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res, next) => {
