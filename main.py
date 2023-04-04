@@ -5,6 +5,7 @@ import os
 import numpy as np
 import torch
 import sys
+import json
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 model = whisper.load_model("tiny.en", device=DEVICE)
@@ -26,4 +27,4 @@ def getArgument(defaultValue = 'audio.mp3'):
     else:
         return defaultValue
 
-print(getData(getArgument()))
+print(json.dumps(getData(getArgument())))
