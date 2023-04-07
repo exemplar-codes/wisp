@@ -35,4 +35,6 @@ app.use((req, res, next) => {
   res.status(404).json({ error: "Page Not Found" });
 });
 
-app.listen(3000 || process.env.PORT, () => console.log("VoTT server ON"));
+const listener = app.listen(process.env.PORT || 3000, () =>
+  console.log(`VoTT server ON ${listener.address().port}`)
+);
