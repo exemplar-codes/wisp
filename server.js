@@ -1,8 +1,10 @@
 const exec = require("./myUtil");
 
 const express = require("express");
+const cors = require("cors");
 const app = express();
 
+app.use(cors());
 // request body parser
 app.use(express.json());
 app.use(express.raw({ type: ["mp3", "ogg"], limit: 1e9 }));
