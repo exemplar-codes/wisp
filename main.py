@@ -30,9 +30,14 @@ def getArgument(defaultValue = 'audio.mp3'):
 
 # IPC part
 from replify import REPLify
+import time
 
 def getDataFinal(audioFilePath):
-    return json.dumps(getData(audioFilePath))
+    start_time = time.time()
+    recognizedObject = getData(audioFilePath)
+    end_time = time.time()
+    recognizedObject['timeTaken'] = end_time - start_time
+    return json.dumps(recognizedObject)
 
 def do_something(x=2):
     return x * 2
