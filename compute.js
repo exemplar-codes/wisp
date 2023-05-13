@@ -10,7 +10,7 @@ async function compute(input) {
     pythonProcess.stdin.write(`${input}\n`);
 
     pythonProcess.stdout.on("data", (data) => {
-      resolve(data.toString());
+      resolve(JSON.parse(data.toString()));
     });
 
     // Handle errors and close events

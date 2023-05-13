@@ -27,9 +27,7 @@ app.post("/audio", async (req, res, next) => {
     const result = await compute(`getDataFinal('${audioFilePath}')`);
 
     // deserialize
-    const resultObject = JSON.parse(result);
-
-    const modelResultObject = JSON.parse(resultObject?.data);
+    const modelResultObject = JSON.parse(result?.data);
     res.status(200).json(modelResultObject);
   } catch (error) {
     res.status(500).json({ error });
