@@ -1,4 +1,4 @@
-const exec = require("./myUtil");
+const compute = require("./compute.js");
 
 const express = require("express");
 const cors = require("cors");
@@ -23,9 +23,14 @@ app.post("/audio", async (req, res, next) => {
   try {
     await fs.writeFile(audioFilePath, req.body);
 
-    const { stderr, stdout } = await exec(`python main.py ${audioFilePath}`);
+    // const result = await compute("do_something(23)");
+    const result = await compute(`getDataFinal('${audioFilePath}')`);
 
-    res.status(200).json(JSON.parse(stdout || stderr || {}));
+    // deserialize
+    const resultObject = JSON.parse(result);
+
+    const modelResultObject = JSON.parse(resultObject?.data);
+    res.status(200).json(modelResultObject);
   } catch (error) {
     res.status(500).json({ error });
   }

@@ -28,4 +28,15 @@ def getArgument(defaultValue = 'audio.mp3'):
     else:
         return defaultValue
 
-print(json.dumps(getData(getArgument())))
+# IPC part
+from replify import REPLify
+
+def getDataFinal(audioFilePath):
+    return json.dumps(getData(audioFilePath))
+
+def do_something(x=2):
+    return x * 2
+
+
+repl = REPLify({"do_something": do_something, "getData": getDataFinal, "getDataFinal": getDataFinal})
+repl.start_listening()
